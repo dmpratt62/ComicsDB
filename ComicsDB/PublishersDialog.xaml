@@ -1,0 +1,39 @@
+﻿<Window x:Class="ComicsDB.PublishersDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComicsDB"
+        mc:Ignorable="d"
+        Title="Publishers" Height="200" Width="360" MaxWidth="380" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="dgPublishers" Grid.Row="0" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" IsSynchronizedWithCurrentItem="True" 
+                  SelectedCellsChanged="DgPublishers_SelectedCellsChanged" 
+                  PreviewKeyDown="DgPublishers_PreviewKeyDown" 
+                  InitializingNewItem="DgPublishers_InitializingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding PublisherId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Publisher's Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Website" Width="200" Binding="{Binding Url}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnAdd" Grid.Column="0" Margin="5" Click="BtnAdd_Click">Add</Button>
+            <!-- Enable the Remove button based on an item being selected in the data grid-->
+            <!--<Button Name="btnRemove" Grid.Column="1" Margin="5" Click="BtnRemove_Click" 
+                    IsEnabled="{Binding ElementName=dgPublishers, Path=SelectedItem, TargetNullValue=false}">Remove</Button>-->
+            <!--<Button Name="btnRemove" Grid.Column="1" Margin="5" Click="BtnRemove_Click" >Remove</Button>-->
+            <Button Name="btnClose" Grid.Column="2" Margin="5" Click="BtnClose_Click">Close</Button>
+        </Grid>
+        
+    </Grid>
+</Window>

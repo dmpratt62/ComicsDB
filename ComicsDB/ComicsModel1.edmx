@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ComicsModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ComicsModel1StoreContainer">
+    <EntitySet Name="Comics" EntityType="ComicsModel1.Store.Comics" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Valuations" EntityType="ComicsModel1.Store.Valuations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Authors" EntityType="ComicsModel1.Store.Authors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Publishers" EntityType="ComicsModel1.Store.Publishers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StorageBoxes" EntityType="ComicsModel1.Store.StorageBoxes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ComicAuthor" Association="ComicsModel1.Store.ComicAuthor">
+      <End Role="Comic" EntitySet="Comics" />
+      <End Role="Author" EntitySet="Authors" />
+    </AssociationSet>
+    <AssociationSet Name="ComicValuation" Association="ComicsModel1.Store.ComicValuation">
+      <End Role="Comic" EntitySet="Comics" />
+      <End Role="Valuation" EntitySet="Valuations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comics">
+    <Key>
+      <PropertyRef Name="ComicsId" />
+    </Key>
+    <Property Name="ComicsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PublisherId" Type="int" Nullable="false" />
+    <Property Name="MainCharacter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PublishDate" Type="datetime" Nullable="false" />
+    <Property Name="Illustrator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IssueNumber" Type="int" Nullable="false" />
+    <Property Name="PhotoFileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SeriesTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SeriesNumber" Type="int" Nullable="false" />
+    <Property Name="SecondaryCharacter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Commemeration" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OriginalValue" Type="decimal" Nullable="false" />
+    <Property Name="Condition" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StorageBoxId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Valuations">
+    <Key>
+      <PropertyRef Name="ValuationId" />
+    </Key>
+    <Property Name="ValuationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="decimal" Nullable="false" />
+    <Property Name="Condition" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Source" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ComicComicsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="AuthorId" />
+    </Key>
+    <Property Name="AuthorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ComicComicsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Publishers">
+    <Key>
+      <PropertyRef Name="PublisherId" />
+    </Key>
+    <Property Name="PublisherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="StorageBoxes">
+    <Key>
+      <PropertyRef Name="StorageBoxId" />
+    </Key>
+    <Property Name="StorageBoxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="ComicAuthor">
+    <End Role="Comic" Type="ComicsModel1.Store.Comics" Multiplicity="1" />
+    <End Role="Author" Type="ComicsModel1.Store.Authors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comic">
+        <PropertyRef Name="ComicsId" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="ComicComicsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ComicValuation">
+    <End Role="Comic" Type="ComicsModel1.Store.Comics" Multiplicity="1" />
+    <End Role="Valuation" Type="ComicsModel1.Store.Valuations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comic">
+        <PropertyRef Name="ComicsId" />
+      </Principal>
+      <Dependent Role="Valuation">
+        <PropertyRef Name="ComicComicsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ComicsModel1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ComicsModel1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comics" EntityType="ComicsModel1.Comic" />
+          <EntitySet Name="Valuations" EntityType="ComicsModel1.Valuation" />
+          <EntitySet Name="Authors" EntityType="ComicsModel1.Author" />
+          <EntitySet Name="Publishers" EntityType="ComicsModel1.Publisher" />
+          <AssociationSet Name="ComicAuthor" Association="ComicsModel1.ComicAuthor">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="Author" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="ComicValuation" Association="ComicsModel1.ComicValuation">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="Valuation" EntitySet="Valuations" />
+          </AssociationSet>
+          <EntitySet Name="StorageBoxes" EntityType="ComicsModel1.StorageBox" />
+        </EntityContainer>
+        <EntityType Name="Comic">
+          <Key>
+            <PropertyRef Name="ComicsId" />
+          </Key>
+          <Property Name="ComicsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PublisherId" Type="Int32" Nullable="false" />
+          <Property Name="MainCharacter" Type="String" Nullable="false" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" />
+          <Property Name="Illustrator" Type="String" Nullable="false" />
+          <Property Name="IssueNumber" Type="Int32" Nullable="false" />
+          <Property Name="PhotoFileName" Type="String" Nullable="false" />
+          <Property Name="SeriesTitle" Type="String" Nullable="false" />
+          <Property Name="SeriesNumber" Type="Int32" Nullable="false" />
+          <Property Name="SecondaryCharacter" Type="String" Nullable="false" />
+          <Property Name="Commemoration" Type="String" Nullable="false" />
+          <Property Name="OriginalValue" Type="Decimal" Nullable="false" />
+          <Property Name="Condition" Type="String" Nullable="false" />
+          <NavigationProperty Name="Authors" Relationship="ComicsModel1.ComicAuthor" FromRole="Comic" ToRole="Author" />
+          <NavigationProperty Name="Valuations" Relationship="ComicsModel1.ComicValuation" FromRole="Comic" ToRole="Valuation" />
+          <Property Name="StorageBoxId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Valuation">
+          <Key>
+            <PropertyRef Name="ValuationId" />
+          </Key>
+          <Property Name="ValuationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Decimal" Nullable="false" />
+          <Property Name="Condition" Type="String" Nullable="false" />
+          <Property Name="Source" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Comic" Relationship="ComicsModel1.ComicValuation" FromRole="Valuation" ToRole="Comic" />
+          <Property Name="ComicComicsId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Comic" Relationship="ComicsModel1.ComicAuthor" FromRole="Author" ToRole="Comic" />
+          <Property Name="ComicComicsId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="PublisherId" />
+          </Key>
+          <Property Name="PublisherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Url" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="ComicAuthor">
+          <End Type="ComicsModel1.Comic" Role="Comic" Multiplicity="1" />
+          <End Type="ComicsModel1.Author" Role="Author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicsId" />
+            </Principal>
+            <Dependent Role="Author">
+              <PropertyRef Name="ComicComicsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComicValuation">
+          <End Type="ComicsModel1.Comic" Role="Comic" Multiplicity="1" />
+          <End Type="ComicsModel1.Valuation" Role="Valuation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicsId" />
+            </Principal>
+            <Dependent Role="Valuation">
+              <PropertyRef Name="ComicComicsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StorageBox">
+          <Key>
+            <PropertyRef Name="StorageBoxId" />
+          </Key>
+          <Property Name="StorageBoxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComicsModel1StoreContainer" CdmEntityContainer="ComicsModel1Container">
+    <EntitySetMapping Name="Comics">
+      <EntityTypeMapping TypeName="IsTypeOf(ComicsModel1.Comic)">
+        <MappingFragment StoreEntitySet="Comics">
+          <ScalarProperty Name="ComicsId" ColumnName="ComicsId" />
+          <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+          <ScalarProperty Name="MainCharacter" ColumnName="MainCharacter" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="Illustrator" ColumnName="Illustrator" />
+          <ScalarProperty Name="IssueNumber" ColumnName="IssueNumber" />
+          <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
+          <ScalarProperty Name="SeriesTitle" ColumnName="SeriesTitle" />
+          <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
+          <ScalarProperty Name="SecondaryCharacter" ColumnName="SecondaryCharacter" />
+          <ScalarProperty Name="Commemoration" ColumnName="Commemeration" />
+          <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="StorageBoxId" ColumnName="StorageBoxId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Valuations">
+      <EntityTypeMapping TypeName="IsTypeOf(ComicsModel1.Valuation)">
+        <MappingFragment StoreEntitySet="Valuations">
+          <ScalarProperty Name="ValuationId" ColumnName="ValuationId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ComicComicsId" ColumnName="ComicComicsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="IsTypeOf(ComicsModel1.Author)">
+        <MappingFragment StoreEntitySet="Authors">
+          <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="ComicComicsId" ColumnName="ComicComicsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publishers">
+      <EntityTypeMapping TypeName="IsTypeOf(ComicsModel1.Publisher)">
+        <MappingFragment StoreEntitySet="Publishers">
+          <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StorageBoxes">
+      <EntityTypeMapping TypeName="IsTypeOf(ComicsModel1.StorageBox)">
+        <MappingFragment StoreEntitySet="StorageBoxes">
+          <ScalarProperty Name="StorageBoxId" ColumnName="StorageBoxId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

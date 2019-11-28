@@ -1,0 +1,111 @@
+﻿<Page x:Class="ComicsDB.DetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ComicsDB"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Background="LightGray"
+      Title="DetailsPage" Loaded="Page_Loaded" Initialized="Page_Initialized">
+    <Page.Resources>
+        <local:PublisherToID x:Key="PubToID"/>
+        <local:LocationToID x:Key="LocToID"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <GroupBox Name="gbFields">
+                <GroupBox.Header>
+                    <TextBlock FontWeight="Bold" FontSize="12">Comics Detail</TextBlock>
+                </GroupBox.Header>
+                <StackPanel Name="spFields" Grid.Row="0">
+                    <StackPanel.Resources>
+                        <Style x:Key="shortLabelStyle" TargetType="{x:Type Label}">
+                            <Setter Property="Height" Value="18"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="5,2,0,0"/>
+                        </Style>
+                        <Style x:Key="editFieldStyle">
+                            <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Control.Height" Value="26"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label Style="{StaticResource shortLabelStyle}" >Publisher</Label>
+                    <ComboBox Name="cbxPublishers" Style="{StaticResource editFieldStyle}"  DisplayMemberPath="Name" SelectedItem="{Binding PublisherId, Converter={StaticResource PubToID}}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Main Character</Label>
+                    <TextBox Name="tbMainCharacter" Style="{StaticResource editFieldStyle}" Text="{Binding Path=MainCharacter}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Publication Date</Label>
+                    <DatePicker Name="dpPublicationDate" Style="{StaticResource editFieldStyle}" SelectedDate="{Binding PublishDate}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Auther(s)</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Name="cbxAuthor" Style="{StaticResource editFieldStyle}" DisplayMemberPath="LastName"/>
+                        <Button Grid.Column="1" Name="btnEditAuthors" Padding="10,0,10,0" Margin="5,0,0,0" Click="btnEditAuthors_Click">Edit</Button>
+                    </Grid>
+                    <Label Style="{StaticResource shortLabelStyle}">Illustrator</Label>
+                    <TextBox Name="tbIllustrator" Style="{StaticResource editFieldStyle}" Text="{Binding Illustrator}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Style="{StaticResource shortLabelStyle}">Series Title</Label>
+                            <TextBox Name="tbSeriesTitle" Style="{StaticResource editFieldStyle}" Text="{Binding SeriesTitle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Style="{StaticResource shortLabelStyle}">Series Number</Label>
+                            <TextBox Name="tbSeriesNumber" Style="{StaticResource editFieldStyle}" HorizontalContentAlignment="Center" Text="{Binding SeriesNumber}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Label Style="{StaticResource shortLabelStyle}">Commemoration</Label>
+                    <TextBox Name="tbCommemoration" Style="{StaticResource editFieldStyle}" Text="{Binding Commemoration}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Original Value</Label>
+                    <TextBox Name="tbValue" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=OriginalValue}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Style="{StaticResource shortLabelStyle}">Estimated Value</Label>
+                            <TextBox Name="tbEstValue" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=Valuations[0].Value}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Style="{StaticResource shortLabelStyle}">Condition</Label>
+                            <TextBox Name="tbEstConditio" Style="{StaticResource editFieldStyle}" Text="{Binding Valuations[0].Condition}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <Label Style="{StaticResource shortLabelStyle}">By</Label>
+                            <TextBox Name="tbEstSource" Style="{StaticResource editFieldStyle}" Text="{Binding Valuations[0].Source}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3">
+                            <Label Style="{StaticResource shortLabelStyle}">Date</Label>
+                            <DatePicker Name="dpEstDate" Style="{StaticResource editFieldStyle}" SelectedDate="{Binding Valuations[0].Date}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Label Style="{StaticResource shortLabelStyle}">Storage Location</Label>
+                    <ComboBox Name="cbxLocations" Style="{StaticResource editFieldStyle}" DisplayMemberPath="Number" ItemStringFormat="{}Box {0}" IsEditable="False" SelectedItem="{Binding StorageBoxId, Converter={StaticResource LocToID}}"/>
+                </StackPanel>
+            </GroupBox>
+            <Button Name="btnSave" Grid.Row="1" Click="BtnSave_Click">Save</Button>
+        </Grid>
+        <Image Name="imgComicImage" Grid.Column="1"/>
+    </Grid>
+</Page>

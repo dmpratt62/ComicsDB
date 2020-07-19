@@ -105,5 +105,9 @@ namespace ComicsDB
             if (!mnuDetailsView.IsChecked) mnuDetailsView.IsChecked = true;
             if (mnuTableView.IsChecked) mnuTableView.IsChecked = false;
         }
+        public void ViewComicsTable()
+        {
+            frmMainFrame.NavigationService.Navigate(_tablePage);
+        }
     }
 }

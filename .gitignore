@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ComicsDB/bin/Debug
+/ComicsDB/obj/Debug
+/packages/EntityFramework.6.3.0
+/ComicsDB/obj/Release

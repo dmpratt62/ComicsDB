@@ -26,10 +26,12 @@ namespace ComicsDB
         public ComicsModel1Container ComicsDB { get; set; }
         public Comic Comic { get; set; }
         public bool IsEditMode { get; set; }
+        private Valuation Value { get; set; }
 
         public DetailsPage(MainWindow mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
             ComicsDB = MainWindow.DB;
             IsEditMode = false;
         }
@@ -87,6 +89,11 @@ namespace ComicsDB
 
                         // bind the Comic to the fields group box
                         DataContext = Comic;
+                        Value = Comic.Valuations.First();
+                        tbEstValue.DataContext = Value;
+                        tbEstSource.DataContext = Value;
+                        tbEstCondition.DataContext = Value;
+                        dpEstDate.DataContext = Value;
                         cbxAuthor.ItemsSource = Comic.Authors;
                     }
                 }
@@ -100,6 +107,17 @@ namespace ComicsDB
             Console.WriteLine($"The Publisher is now: {Comic.PublisherId}");
             Console.WriteLine($"The location id is {Comic.StorageBoxId}");
             
+            if(IsEditMode)
+            {
+                ComicsDB.Comics.Local.Add(Comic);
+                ComicsDB.SaveChanges();
+                _mainWindow.ViewComicsTable();
+            }
+
+        }
+        private void btnDiscard_Click(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.ViewComicsTable();
         }
 
         private void btnEditAuthors_Click(object sender, RoutedEventArgs e)
@@ -113,6 +131,7 @@ namespace ComicsDB
 
             }
         }
+
     }
 
     public class PublisherToID : IValueConverter

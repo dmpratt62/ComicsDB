@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ComicsDB"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="640" d:DesignWidth="800"
       Background="LightGray"
       Title="DetailsPage" Loaded="Page_Loaded" Initialized="Page_Initialized">
     <Page.Resources>
@@ -31,7 +31,8 @@
                 <StackPanel Name="spFields" Grid.Row="0">
                     <StackPanel.Resources>
                         <Style x:Key="shortLabelStyle" TargetType="{x:Type Label}">
-                            <Setter Property="Height" Value="18"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Height" Value="16"/>
                             <Setter Property="Padding" Value="0"/>
                             <Setter Property="HorizontalAlignment" Value="Left"/>
                             <Setter Property="Margin" Value="5,2,0,0"/>
@@ -76,6 +77,8 @@
                     <TextBox Name="tbCommemoration" Style="{StaticResource editFieldStyle}" Text="{Binding Commemoration}"/>
                     <Label Style="{StaticResource shortLabelStyle}">Original Value</Label>
                     <TextBox Name="tbValue" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=OriginalValue}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Present Condition</Label>
+                    <TextBox Name="tbCondition" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=Condition}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -85,26 +88,35 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <Label Style="{StaticResource shortLabelStyle}">Estimated Value</Label>
-                            <TextBox Name="tbEstValue" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=Valuations[0].Value}"/>
+                            <TextBox Name="tbEstValue" Style="{StaticResource editFieldStyle}" Text="{Binding StringFormat={}{0:C}, Path=Value}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label Style="{StaticResource shortLabelStyle}">Condition</Label>
-                            <TextBox Name="tbEstConditio" Style="{StaticResource editFieldStyle}" Text="{Binding Valuations[0].Condition}"/>
+                            <TextBox Name="tbEstCondition" Style="{StaticResource editFieldStyle}" Text="{Binding Condition}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <Label Style="{StaticResource shortLabelStyle}">By</Label>
-                            <TextBox Name="tbEstSource" Style="{StaticResource editFieldStyle}" Text="{Binding Valuations[0].Source}"/>
+                            <TextBox Name="tbEstSource" Style="{StaticResource editFieldStyle}" Text="{Binding Source}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="3">
                             <Label Style="{StaticResource shortLabelStyle}">Date</Label>
-                            <DatePicker Name="dpEstDate" Style="{StaticResource editFieldStyle}" SelectedDate="{Binding Valuations[0].Date}"/>
+                            <DatePicker Name="dpEstDate" Style="{StaticResource editFieldStyle}" SelectedDate="{Binding Date}"/>
                         </StackPanel>
                     </Grid>
                     <Label Style="{StaticResource shortLabelStyle}">Storage Location</Label>
                     <ComboBox Name="cbxLocations" Style="{StaticResource editFieldStyle}" DisplayMemberPath="Number" ItemStringFormat="{}Box {0}" IsEditable="False" SelectedItem="{Binding StorageBoxId, Converter={StaticResource LocToID}}"/>
+                    <Label Style="{StaticResource shortLabelStyle}">Comments</Label>
+                    <TextBox Name="tbComments" Height="50" TextWrapping="Wrap" Text="{Binding Comments}"/>
                 </StackPanel>
             </GroupBox>
-            <Button Name="btnSave" Grid.Row="1" Click="BtnSave_Click">Save</Button>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnSave" Grid.Column="0" Click="BtnSave_Click" Margin="5">Save Changes</Button>
+                <Button Name="btnDiscard" Grid.Column="1" Margin="5" Click="btnDiscard_Click">Discard</Button>
+            </Grid>
         </Grid>
         <Image Name="imgComicImage" Grid.Column="1"/>
     </Grid>

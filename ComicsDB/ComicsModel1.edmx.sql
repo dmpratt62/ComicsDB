@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/17/2019 10:30:19
--- Generated from EDMX file: J:\Users\DaveAndDee\Documents\Visual Studio 2017\My Projects\ComicsDB\ComicsDB\ComicsModel1.edmx
+-- Date Created: 11/29/2019 08:03:21
+-- Generated from EDMX file: C:\Users\davea\source\repos\dmpratt62\ComicsDB\ComicsDB\ComicsModel1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [J:\USERS\DAVEANDDEE\DOCUMENTS\VISUAL STUDIO 2017\MY PROJECTS\COMICS.MDF];
+USE [J:\USERS\DAVEANDDEE\DOCUMENTS\COMICS\COMICS.MDF];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -60,10 +60,11 @@ CREATE TABLE [dbo].[Comics] (
     [SeriesTitle] nvarchar(max)  NOT NULL,
     [SeriesNumber] int  NOT NULL,
     [SecondaryCharacter] nvarchar(max)  NOT NULL,
-    [Commemeration] nvarchar(max)  NOT NULL,
+    [Commemoration] nvarchar(max)  NOT NULL,
     [OriginalValue] decimal(18,0)  NOT NULL,
     [Condition] nvarchar(max)  NOT NULL,
-    [StorageBoxId] int  NOT NULL
+    [StorageBoxId] int  NOT NULL,
+    [Comments] nvarchar(255)  NOT NULL
 );
 GO
 

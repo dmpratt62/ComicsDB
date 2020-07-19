@@ -34,10 +34,11 @@
     <Property Name="SeriesTitle" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SeriesNumber" Type="int" Nullable="false" />
     <Property Name="SecondaryCharacter" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Commemeration" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Commemoration" Type="nvarchar(max)" Nullable="false" />
     <Property Name="OriginalValue" Type="decimal" Nullable="false" />
     <Property Name="Condition" Type="nvarchar(max)" Nullable="false" />
     <Property Name="StorageBoxId" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" Nullable="false" MaxLength="255" />
   </EntityType>
   <EntityType Name="Valuations">
     <Key>
@@ -124,29 +125,30 @@
           </Key>
           <Property Name="ComicsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PublisherId" Type="Int32" Nullable="false" />
-          <Property Name="MainCharacter" Type="String" Nullable="false" />
+          <Property Name="MainCharacter" Type="String" Nullable="false" DefaultValue="Our Hero" />
           <Property Name="PublishDate" Type="DateTime" Nullable="false" />
           <Property Name="Illustrator" Type="String" Nullable="false" />
-          <Property Name="IssueNumber" Type="Int32" Nullable="false" />
+          <Property Name="IssueNumber" Type="Int32" Nullable="false" DefaultValue="0" />
           <Property Name="PhotoFileName" Type="String" Nullable="false" />
-          <Property Name="SeriesTitle" Type="String" Nullable="false" />
-          <Property Name="SeriesNumber" Type="Int32" Nullable="false" />
+          <Property Name="SeriesTitle" Type="String" Nullable="false" DefaultValue="Title" />
+          <Property Name="SeriesNumber" Type="Int32" Nullable="false" DefaultValue="0" />
           <Property Name="SecondaryCharacter" Type="String" Nullable="false" />
-          <Property Name="Commemoration" Type="String" Nullable="false" />
-          <Property Name="OriginalValue" Type="Decimal" Nullable="false" />
-          <Property Name="Condition" Type="String" Nullable="false" />
+          <Property Name="Commemoration" Type="String" Nullable="false" DefaultValue="none" />
+          <Property Name="OriginalValue" Type="Decimal" Nullable="false" DefaultValue="0.00" />
+          <Property Name="Condition" Type="String" Nullable="false" DefaultValue="Raw" />
           <NavigationProperty Name="Authors" Relationship="ComicsModel1.ComicAuthor" FromRole="Comic" ToRole="Author" />
           <NavigationProperty Name="Valuations" Relationship="ComicsModel1.ComicValuation" FromRole="Comic" ToRole="Valuation" />
           <Property Name="StorageBoxId" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="255" DefaultValue="No comment" />
         </EntityType>
         <EntityType Name="Valuation">
           <Key>
             <PropertyRef Name="ValuationId" />
           </Key>
           <Property Name="ValuationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Decimal" Nullable="false" />
-          <Property Name="Condition" Type="String" Nullable="false" />
-          <Property Name="Source" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Nullable="false" DefaultValue="0.00" />
+          <Property Name="Condition" Type="String" Nullable="false" DefaultValue="Raw" />
+          <Property Name="Source" Type="String" Nullable="false" DefaultValue="n/a" />
           <Property Name="Date" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Comic" Relationship="ComicsModel1.ComicValuation" FromRole="Valuation" ToRole="Comic" />
           <Property Name="ComicComicsId" Type="Int32" Nullable="false" />
@@ -220,10 +222,11 @@
           <ScalarProperty Name="SeriesTitle" ColumnName="SeriesTitle" />
           <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
           <ScalarProperty Name="SecondaryCharacter" ColumnName="SecondaryCharacter" />
-          <ScalarProperty Name="Commemoration" ColumnName="Commemeration" />
+          <ScalarProperty Name="Commemoration" ColumnName="Commemoration" />
           <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
           <ScalarProperty Name="Condition" ColumnName="Condition" />
           <ScalarProperty Name="StorageBoxId" ColumnName="StorageBoxId" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

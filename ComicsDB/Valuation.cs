@@ -14,6 +14,14 @@ namespace ComicsDB
     
     public partial class Valuation
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Valuation()
+        {
+            this.Value = 0.00m;
+            this.Condition = "Raw";
+            this.Source = "n/a";
+        }
+    
         public int ValuationId { get; set; }
         public decimal Value { get; set; }
         public string Condition { get; set; }

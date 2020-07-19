@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'J:\Users\DaveAndDee\Documents\Visual Studio 2019\My Projects\ComicsDB\ComicsDB\ComicsModel1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\davea\source\repos\dmpratt62\ComicsDB\ComicsDB\ComicsModel1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

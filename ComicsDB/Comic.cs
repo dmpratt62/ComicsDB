@@ -17,6 +17,14 @@ namespace ComicsDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Comic()
         {
+            this.MainCharacter = "Our Hero";
+            this.IssueNumber = 0;
+            this.SeriesTitle = "Title";
+            this.SeriesNumber = 0;
+            this.Commemoration = "none";
+            this.OriginalValue = 0.00m;
+            this.Condition = "Raw";
+            this.Comments = "No comment";
             this.Authors = new HashSet<Author>();
             this.Valuations = new HashSet<Valuation>();
         }
@@ -35,6 +43,7 @@ namespace ComicsDB
         public decimal OriginalValue { get; set; }
         public string Condition { get; set; }
         public int StorageBoxId { get; set; }
+        public string Comments { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Author> Authors { get; set; }

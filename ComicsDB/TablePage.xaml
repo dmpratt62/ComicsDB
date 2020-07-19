@@ -14,7 +14,7 @@
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0"  Name="dgComics" IsReadOnly="True" Background="Transparent"></DataGrid>
+        <DataGrid Grid.Row="0"  Name="dgComics" IsReadOnly="True" Background="Transparent" HorizontalScrollBarVisibility="Auto"></DataGrid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Name="btnNew" Width="100" Margin="2" Click="BtnNew_Click">New</Button>
             <Button Name="btnEdit" Width="100" Margin="2">Edit</Button>

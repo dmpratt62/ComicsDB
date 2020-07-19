@@ -49,7 +49,14 @@ namespace ComicsDB
             Author aut = new Author();
             aut.FirstName = "Bob";
             aut.LastName = "Darterita";
+            Valuation value = new Valuation();
+            value.Condition = "Fair";
+            value.Value = 0.0M;
+            value.Source = "rp";
+            value.Date = DateTime.Today;
+            newComic.Valuations.Add(value);
             newComic.Authors.Add(aut);
+            newComic.Comments = "This is a general comment on the comic.";
 
             _mainWindow.EditComicDetails(newComic);
         }
